@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active:
+    - dev
+  application:
+    name: dockmind-backend
+
+server:
+  port: 8081

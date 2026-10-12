@@ -1,0 +1,7 @@
+.git/
+.idea/
+.vscode/
+.metals/
+target/
+.env
+*.log
