@@ -7,7 +7,7 @@
 ![Document Upload](screenshots/document-upload.png)
 
 ### Document Upload sucess
-![Document Upload sucess](screenshots/uploaded-sucess data.png)
+![Document Upload sucess](screenshots/uploaded-sucess-data.png)
 
 ### database
 ![database tables](screenshots/database.png)
