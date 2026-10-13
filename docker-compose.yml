@@ -14,11 +14,13 @@ services:
       - ytpgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
+    
     healthcheck:
-      test: ["CMD-SHELL", "pg-isready -U postgres -d dockmind"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d dockmind"]
       interval: 5s
       timeout: 5s
       retries: 5
+
       
 networks:
   docmind:
