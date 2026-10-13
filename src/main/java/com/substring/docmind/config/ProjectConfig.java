@@ -1,5 +1,6 @@
 package com.substring.docmind.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -107,6 +108,12 @@ public class ProjectConfig {
                         .contact(new Contact()
                                 .name("Monstermash")
                                 .email("waghitesh1@gmail.com")));
+    }
+
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
 }
