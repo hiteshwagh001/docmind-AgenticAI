@@ -14,7 +14,7 @@ async function request(path, options = {}) {
   return payload?.data
 }
 
-export const docmindApi = {
+export const foxsecApi = {
   getDocuments: () => request('/api/v1/documents'),
   deleteDocument: (id) => request(`/api/v1/documents/${id}`, { method: 'DELETE' }),
   uploadDocuments: (files) => {
@@ -28,3 +28,6 @@ export const docmindApi = {
   },
   ask: (question, documentId) => request('/chat/query', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question, documentId: documentId || null }) }),
 }
+
+// Kept as an alias during the product rename so existing UI imports remain stable.
+export const docmindApi = foxsecApi

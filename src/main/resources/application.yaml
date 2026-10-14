@@ -3,7 +3,7 @@ spring:
     active:
     - dev
   application:
-    name: dockmind-backend
+    name: foxsec-backend
 
 server:
   port: 8081

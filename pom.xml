@@ -12,8 +12,8 @@
 		<relativePath />
 	</parent>
 
-	<groupId>com.substring.docmind</groupId>
-	<artifactId>dockmind</artifactId>
+	<groupId>com.substring.foxsec</groupId>
+	<artifactId>foxsec</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>

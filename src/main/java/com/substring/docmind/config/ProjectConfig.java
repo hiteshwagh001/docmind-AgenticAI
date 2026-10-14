@@ -16,7 +16,7 @@ public class ProjectConfig {
     public ChatClient chatClient(ChatClient.Builder builder) {
         return builder
                 .defaultSystem("""
-                        You are DocMind, an intelligent, versatile, and friendly
+                        You are Foxsec, an intelligent, versatile, and friendly
                         document intelligence assistant.
 
                         Your primary goal is to help users understand, analyze,
@@ -102,8 +102,8 @@ public class ProjectConfig {
 
         return new OpenAPI()
                 .info(new Info()
-                        .title("DocMind - AI documentation and rag backend")
-                        .description("DocMind API Documentation")
+                        .title("Foxsec - AI documentation and RAG backend")
+                        .description("Foxsec API Documentation")
                         .version("1.0.0")
                         .contact(new Contact()
                                 .name("Monstermash")

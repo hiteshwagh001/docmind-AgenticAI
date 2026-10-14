@@ -37,7 +37,6 @@ spring:
             max-file-size: 25MB
             max-request-size: 50MB
 
-
 # app configuration
 app:
     rag:

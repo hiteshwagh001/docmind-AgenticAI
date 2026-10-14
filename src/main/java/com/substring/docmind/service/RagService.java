@@ -98,7 +98,7 @@ public class RagService {
                 requestDto.getQuestion(),
                 requestDto.getDocumentId(),
                 requestDto.getTopK(),
-                requestDto.getMinSimilarity()); // TODO: add minSimilarity
+                requestDto.getMinSimilarity());
 
         String contextText = buildContextString(relevantDocuments);
 
