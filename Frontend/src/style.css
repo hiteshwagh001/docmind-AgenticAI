@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme { --font-sans: "Inter", "Segoe UI", sans-serif; }
+
+* { box-sizing: border-box; }
+html { font-family: var(--font-sans); }
+body { margin: 0; min-width: 320px; }
+button, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.panel { border: 1px solid rgb(226 232 240 / .9); border-radius: 1rem; background: rgb(255 255 255 / .88); box-shadow: 0 12px 40px rgb(15 23 42 / .05); }
+.primary-button { border-radius: .75rem; background: #4f46e5; padding: .65rem 1rem; color: white; font-size: .875rem; font-weight: 600; box-shadow: 0 6px 14px rgb(79 70 229 / .22); transition: background .18s ease, transform .18s ease; }
+.primary-button:hover { background: #4338ca; transform: translateY(-1px); }
+.primary-button:disabled { cursor: not-allowed; opacity: .55; transform: none; }
+.typing-dots { display: flex; align-items: center; gap: .25rem; }
+.typing-dots i { display: block; width: .38rem; height: .38rem; border-radius: 9999px; background: #818cf8; animation: pulse-dot 1s ease-in-out infinite; }
+.typing-dots i:nth-child(2) { animation-delay: .15s; }.typing-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes pulse-dot { 0%, 100% { opacity: .3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }

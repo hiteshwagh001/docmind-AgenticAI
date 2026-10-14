@@ -61,7 +61,7 @@ public class RagService {
                 .content();
 
         long responseTime = System.currentTimeMillis() - startTime;
-        return null;
+        return new ChatResponseDto(answer, request.getConversationId(), citationDtos, responseTime);
 
     }
 

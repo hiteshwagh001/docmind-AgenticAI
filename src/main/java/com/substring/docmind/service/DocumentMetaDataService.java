@@ -21,6 +21,7 @@ import com.substring.docmind.exception.DocumentProcessingException;
 import com.substring.docmind.exception.ResourceNotFoundException;
 import com.substring.docmind.repository.DocumentMetaDataRepo;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -35,6 +36,7 @@ public class DocumentMetaDataService {
     private final JdbcTemplate jdbcTemplate;
     private final ModelMapper modelMapper;
 
+    @Transactional
     public DocumentResponseDto uploadAndProcess(MultipartFile file) {
         String fileName = file.getOriginalFilename() != null ? file.getOriginalFilename() : "document";
         String contentType = file.getContentType() != null ? file.getContentType() : "application/octet-stream";
@@ -75,6 +77,7 @@ public class DocumentMetaDataService {
                 .build();
     }
 
+    @Transactional
     public List<DocumentResponseDto> uploadMultipleDocument(List<MultipartFile> files) {
         List<DocumentResponseDto> responseDtos = new ArrayList<>();
         for (MultipartFile file : files) {
@@ -94,6 +97,7 @@ public class DocumentMetaDataService {
 
     }
 
+    @Transactional
     public DocumentMetadataDto getDocumentById(UUID id) {
 
         DocumentMetadata documentMetadata = documentMetaDataRepo.findById(id)
