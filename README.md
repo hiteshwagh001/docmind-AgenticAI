@@ -16,3 +16,11 @@
 ### docker container
 ![docker container running pgvector](screenshots/docker-container.png)
 
+### List all Uploaded Document
+![List of all uploaded document API](screenshots/ListAllUploadedDcoument.png)
+
+
+### Delete Doc
+![Delete Doc API](screenshots/deleteDoc.png)
+
+

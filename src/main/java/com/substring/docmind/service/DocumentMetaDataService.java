@@ -17,6 +17,7 @@ import com.substring.docmind.dto.DocumentMetadataDto;
 import com.substring.docmind.dto.DocumentResponseDto;
 import com.substring.docmind.entity.DocumentMetadata;
 import com.substring.docmind.entity.DocumentStatus;
+import com.substring.docmind.exception.DocumentProcessingException;
 import com.substring.docmind.exception.ResourceNotFoundException;
 import com.substring.docmind.repository.DocumentMetaDataRepo;
 
@@ -49,12 +50,20 @@ public class DocumentMetaDataService {
 
         // save the document meta data
         documentMetadata = documentMetaDataRepo.save(documentMetadata);
+        List<Document> parseDoc = null;
+        int chunkCreated = 0;
 
-        // parse the file
-        List<Document> parseDoc = parserService.parse(file);
+        try {
+            // parse the file
+            parseDoc = parserService.parse(file);
 
-        // ingest service
-        int chunkCreated = ingestionService.ingest(documentMetadata, parseDoc);
+            // ingest service
+            chunkCreated = ingestionService.ingest(documentMetadata, parseDoc);
+        } catch (DocumentProcessingException e) {
+            log.info("Document metadata deleting due to fail processing");
+            documentMetaDataRepo.delete(documentMetadata);
+            throw e;
+        }
 
         return DocumentResponseDto.builder()
                 .id(documentMetadata.getId())
@@ -77,10 +86,11 @@ public class DocumentMetaDataService {
 
     public List<DocumentMetadataDto> getAllDocuments() {
         List<DocumentMetadata> allDocuments = documentMetaDataRepo.findAllByOrderByCreatedAtDesc();
-        allDocuments.stream()
+        List<DocumentMetadataDto> responseDtos = allDocuments.stream()
                 .map(documentMetadata -> modelMapper.map(documentMetadata, DocumentMetadataDto.class))
                 .toList();
-        return null;
+
+        return responseDtos;
 
     }
 
@@ -96,15 +106,15 @@ public class DocumentMetaDataService {
         DocumentMetadata documentMetadata = documentMetaDataRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Document not found with id " + id));
 
-                // delete vector entries
+        // delete vector entries
 
-                try {
-                    String deleteVectorSql = "DELETE FROM vector_store WHERE metadata->>'documentId'=?";
-                    int deletedCount = jdbcTemplate.update(deleteVectorSql, id.toString());
-                    log.info("Deleted {} vector chunks for document id {}", deletedCount,id);
-                } catch (Exception e) {
-                    log.warn("Could not delete vector  from vector store directly : {}", e.getMessage());
-                }
+        try {
+            String deleteVectorSql = "DELETE FROM vector_store WHERE metadata->>'documentId'=?";
+            int deletedCount = jdbcTemplate.update(deleteVectorSql, id.toString());
+            log.info("Deleted {} vector chunks for document id {}", deletedCount, id);
+        } catch (Exception e) {
+            log.warn("Could not delete vector  from vector store directly : {}", e.getMessage());
+        }
     }
 
 }
